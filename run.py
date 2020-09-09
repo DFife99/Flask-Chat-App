@@ -7,35 +7,33 @@ messages = []
 
 
 def add_messages(username, message):
-    """Add messages to the `messages` list"""
-    now = datetime.now().strftime("%H:%M:%S")
+    """ Add messages to the messages list"""
+    now = datetime.now().strftime('%H:%M:%S')
     messages.append("({}) {}: {}".format(now, username, message))
 
 
 def get_all_messages():
-    """Get all of the messages and separate them with a `br`"""
-    return "<br>".join(messages)
+    """ Get all messages and seperate them with a br"""
+    return "<br>" .join(messages)
 
 
 @app.route("/")
 def index():
-    """Main page with instructions"""
+    """ Main page with instructions"""
     return render_template("index.html")
 
 
-@app.route("/<username>")
+@app.route('/<username>')
 def user(username):
-    """Display chat messages"""
+    """ Display chat messages """
     return "<h1>Welcome, {0}</h1>{1}".format(username, get_all_messages())
 
 
-@app.route("/<username>/<message>")
+@app.route('/<username>/<message>')
 def send_message(username, message):
-    """Create a new message and redirect back to the chat page"""
+    """ Create a new message and redirect to the chat page"""
     add_messages(username, message)
-    return redirect("/" + username)
-
-
+    return redirect('/' + username)
 
 
 if __name__ =="__main__":
